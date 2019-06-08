@@ -1,0 +1,68 @@
+<% if (typeof categories != 'undefined') { %>
+<form>
+    <div class="form-group">
+        <label for="categories">Kategóriák</label>
+        <select class="form-control" id="categories" name="category">
+            <option value="">Válasszon kategóriát!</option>
+            <% categories.forEach((category) => { %>
+                <option value="<%= category.Category%>" <%= selectedCategory == category.Category ? 'selected' : '' %>>
+                    <%= category.Category %></option>
+            <%}) %>
+        </select>
+    </div>
+</form>
+<% } %>
+<% if (typeof menuItems != 'undefined') { %>
+    <% menuItems.forEach(menuItem => { %>
+    <div class="menuItem">
+        <div class="row no-gutters align-items-end">
+            <div class="col">
+                <h1><%= menuItem.Name %></h1>
+            </div>
+
+            <div class="col-auto">
+                <span><%= menuItem.Price %> Ft</span>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col">
+                <span>Csípős:
+                    <% if(menuItem.Spicy) { %>
+                    <i class="fas fa-check"></i>
+                    <% } else { %>
+                    <i class="fas fa-times"></i>
+                    <% } %>
+                </span><br>
+                <span>Vegatariánus:
+                    <% if(menuItem.Vegatarian) { %>
+                    <i class="fas fa-check"></i>
+                    <% } else { %>
+                    <i class="fas fa-times"></i>
+                    <% } %>
+                </span>
+                <p><%= menuItem.Description%></p>
+            </div>
+            <% if (typeof user != 'undefined') { %>
+            <div class="col-auto">
+                <form action="/cart" method="POST">
+                    <div class="form-group">
+                        <label for="quantity">Mennyiség</label>
+                        <input type="number" name="quantity" min="1" max="99" value="1">
+                        <input type="hidden" name="menuItemId" value="<%= menuItem.id %>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kosárba teszem</button>
+                </form>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <% }); %>
+<% }; %>
+
+<script>
+    $(function () {
+        $("#categories").change(function () {
+            this.form.submit();
+        })
+    })
+</script>

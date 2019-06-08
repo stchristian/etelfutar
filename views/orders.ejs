@@ -1,0 +1,39 @@
+<% if( typeof orders != "undefined" && orders.length > 0) {  %>
+<div class="row">
+    <div class="col-12">
+        <h1>Rendeléseim: </h1>
+    </div>
+</div>
+
+<% orders.forEach((order) => { %>
+<div class="orderContainer my-4">
+    <div class="row">
+        <div class="col">
+            <h2>
+                #<%= order.Id%> <%= order.FirstName%> <%= order.LastName%>
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Szállítási cím: <%= order.Address %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Telefonszám: <%= order.PhoneNumber %>
+        </div>
+    </div>
+    <% order.OrderItems.forEach((orderItem) => { %>
+    <div class="row">
+        <div class="col-4"><%= orderItem.MenuItem.Name %> </div>
+        <div class="col-4"><%= orderItem.Quantity %> db</div>
+        <div class="col-4 text-right"><%= orderItem.Price %> Ft</div>
+    </div>
+    <% }); %>
+    <div class="row">
+        <div class="col-4 offset-8 text-right font-weight-bold">Végösszeg: <%= order.TotalPrice %> Ft</div>
+    </div>
+</div>
+<% }); %>
+<%} %>

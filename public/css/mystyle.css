@@ -1,0 +1,27 @@
+.menuItem {
+    border-radius: 5px;
+    background-color: #ddd;
+    margin: 1em 0;
+    padding: 15px;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+.fa-cart-plus {
+    font-size: 2em;
+    color: black;
+}
+
+.cartContainer {
+    border-radius: 5px;
+    background-color: #ddd;
+    padding: 15px;
+}
+
+.orderContainer {
+    border-radius: 5px;
+    background-color: #ddd;
+    padding: 15px;
+}

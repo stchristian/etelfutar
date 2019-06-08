@@ -1,0 +1,82 @@
+<% if ( cartItems.length > 0) { %>
+<div class="cartContainer my-3">
+    <div class="row">
+        <div class="col">
+            <h2><i class="fas fa-shopping-cart"></i> Kosár tartalma</h2>
+        </div>
+    </div>
+    <div class="row menuItemHeader">
+        <div class="col-4">Tétel neve:</div>
+        <div class="col-4">Darabszám:</div>
+        <div class="col-4 text-center">Ár:</div>
+    </div>
+    <% cartItems.forEach((cartItem) => { %>
+    <div class="row">
+        <div class="col-4">
+            <a href="/cart/delete/<%= cartItem.Id %>">
+                <i class="fas fa-trash"></i>
+            </a>
+            <%= cartItem.MenuItem.Name %>
+        </div>
+        <div class="col-4"><%= cartItem.Quantity %> db</div>
+        <div class="col-4 text-right"><%= cartItem.Price %> Ft</div>
+    </div>
+    <% }) %>
+    <div class="row">
+        <div class="col-4 offset-8 text-right">
+            <span class="d-block font-weight-bold">Végösszeg: <%= totalPrice %> Ft</span>
+        </div>
+        <div class="w-100"></div>
+
+    </div>
+    <div class="row mt-2 justify-content-end">
+        <div class="col-md-auto">
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#placeOrder">
+                Rendelés leadása
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <small class="font-italic">Max megengedett kosárméret: <%= maxCartTotalPrice %> Ft</small>
+        </div>
+    </div>
+</div>
+<% } %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="placeOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rendelés leadása</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/order" method="POST">
+                    <div class="form-group">
+                        <label for="firstName">Keresztnév</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Vezetéknév</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Szállítási cím</label>
+                        <input type="text" id="address" name="address" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Telefonszám</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Rendelés</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
