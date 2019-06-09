@@ -5,7 +5,6 @@ const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const FileStore = require('session-file-store')(session);
 const morgan = require('morgan');
-const passport = require("./config/passport");
 const db = require('./db/database');
 
 const app = express();
@@ -23,8 +22,6 @@ app.use(session({
 app.set('view engine', 'ejs');
 app.set('layout extractScripts', true);
 app.use(expressLayouts);
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use((req,res,next) => {
     req.models = db.models;
