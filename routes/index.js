@@ -1,8 +1,10 @@
 const router = require("express").Router();
 
-const loginUserMW = require('../auth/loginUser');
-const logoutUserMW = require('../auth/logoutUser');
-const ensureAuthMW = require('../auth/ensureAuth');
+const db = require("../db/database");
+const authService = require('../service/authenticator')(db.models.User);
+const logoutUserMW = require('../middlewares/auth/logoutUser')();
+const ensureAuthMW = require('../middlewares/auth/ensureAuth')();
+const loginUserMW = require('../middlewares/auth/loginUser')(authService);
 
 const createOrUpdateCartItemMW = require("../middlewares/shopping/createOrUpdateCartItem");
 const getCartItemsMW = require("../middlewares/shopping/getCartItems");
@@ -17,7 +19,7 @@ const deleteCartItemMW = require("../middlewares/shopping/deleteCartItem");
 
 router.get('/',
     (req,res,next ) => {
-        if(req.user) {
+        if(req.session.userId) {
             return res.redirect("/dashboard");
         }
         else {
