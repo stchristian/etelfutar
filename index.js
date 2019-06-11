@@ -28,6 +28,8 @@ app.use(expressLayouts);
 app.use((req,res,next) => {
     req.models = db.models;
     req.sequelize = db.sequelize;
+    res.locals.register_error = [];
+    res.locals.login_error = [];
     return next();
 })
 

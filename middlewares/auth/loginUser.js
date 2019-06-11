@@ -12,6 +12,7 @@ module.exports = function(authenticator) {
             return next();
         }
         else {
+            req.flash('login_error', result.msg);
             console.log(`User failed to login : ${result.msg}`);
             return res.redirect('/');
         }

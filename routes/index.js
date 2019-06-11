@@ -29,7 +29,11 @@ router.get('/',
     getCategoriesMW,
     getMenuItemsMW,
     (req,res) => {
-        return res.render('index', { register_error : req.flash('register_error') , extractScripts : true });
+        return res.render('index', { 
+            register_error : req.flash('register_error'), 
+            login_error: req.flash('login_error'),
+            extractScripts: true ,
+        });
     }
 );
 

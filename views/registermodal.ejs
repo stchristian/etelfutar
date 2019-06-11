@@ -8,14 +8,14 @@
                 </button>
             </div>
             <form action="/register" method="POST">
-                <% if (register_error.length > 0) { %>
-                    <% register_error.forEach(error => { %>
-                        <div class="alert alert-danger" role="alert">
-                            <%= error %>
-                        </div>
-                    <% }); %>
-                <% } %>
                 <div class="modal-body">
+                    <% if (register_error.length > 0) { %>
+                    <% register_error.forEach(error => { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                    <% }); %>
+                    <% } %>
                     <div class="form-group">
                         <label for="signUpEmail">*Email</label>
                         <input type="text" id="signUpEmail" name="email" class="form-control"

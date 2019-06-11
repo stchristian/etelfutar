@@ -67,5 +67,8 @@
         <% if (register_error.length > 0) { %> 
             $('#register').modal('show');
         <% } %>
+        <% if (login_error.length > 0) { %> 
+            $('#login').modal('show');
+        <% } %>
     });
 </script>
