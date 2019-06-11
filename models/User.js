@@ -12,7 +12,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate : {
-                isEmail : true
+                isEmail : {
+                    msg: "Az email cím nem megfelelő formátumú"
+                }
             }
         },
         Password: {
