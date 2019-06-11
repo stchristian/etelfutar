@@ -6,6 +6,7 @@ const session = require("express-session");
 const FileStore = require('session-file-store')(session);
 const morgan = require('morgan');
 const db = require('./db/database');
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
 }));
+app.use(flash());
 app.set('view engine', 'ejs');
 app.set('layout extractScripts', true);
 app.use(expressLayouts);
@@ -26,7 +28,6 @@ app.use(expressLayouts);
 app.use((req,res,next) => {
     req.models = db.models;
     req.sequelize = db.sequelize;
-    res.locals.messages = [];
     return next();
 })
 

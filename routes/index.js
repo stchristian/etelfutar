@@ -29,7 +29,7 @@ router.get('/',
     getCategoriesMW,
     getMenuItemsMW,
     (req,res) => {
-        return res.render('index');
+        return res.render('index', { register_error : req.flash('register_error') , extractScripts : true });
     }
 );
 
@@ -78,10 +78,6 @@ router.post('/order',
         return res.redirect('/dashboard');
     }
 );
-
-router.get('/register', (req,res) => {
-    return res.render('register');
-})
 
 router.post('/register', 
     createUserMW, 

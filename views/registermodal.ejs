@@ -8,10 +8,17 @@
                 </button>
             </div>
             <form action="/register" method="POST">
+                <% if (register_error.length > 0) { %>
+                    <% register_error.forEach(error => { %>
+                        <div class="alert alert-danger" role="alert">
+                            <%= error %>
+                        </div>
+                    <% }); %>
+                <% } %>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="signUpEmail">*Email</label>
-                        <input type="email" id="signUpEmail" name="email" class="form-control"
+                        <input type="text" id="signUpEmail" name="email" class="form-control"
                             placeholder="kovacs.janos@aut.bme.hu"
                             value="<%= typeof email != 'undefined' ? email : '' %>" />
                     </div>

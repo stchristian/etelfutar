@@ -64,5 +64,8 @@
         $("#categories").change(function () {
             this.form.submit();
         })
-    })
+        <% if (register_error.length > 0) { %> 
+            $('#register').modal('show');
+        <% } %>
+    });
 </script>
